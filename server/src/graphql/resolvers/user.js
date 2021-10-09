@@ -4,14 +4,24 @@ const {
   validateRegisterInput,
   validateLoginInput,
 } = require("../../utils/validation");
-const User = require("../../models/User");
 const { Password } = require("../../utils/Password");
+const { authorization } = require("../../utils/auth");
+
+const User = require("../../models/User");
 
 module.exports = {
+  Query: {
+    async getUser(_, args, context) {
+      const user = authorization(context);
+      console.log(user);
+      return user;
+    },
+  },
   Mutation: {
     async login(_, { username, password }) {
       const { errors, valid } = validateLoginInput(username, password);
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ username }).populate("todos");
+
       if (!user) {
         errors.general = "User not found";
         throw new UserInputError("Wrong Credentials", { errors });
@@ -26,6 +36,7 @@ module.exports = {
         ...user._doc,
         id: user._id,
         token: user.generateJwt(),
+        todos: user.todos,
       };
     },
     async register(

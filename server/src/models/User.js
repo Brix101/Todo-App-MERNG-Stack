@@ -7,6 +7,12 @@ const UserSchema = new Schema({
   password: String,
   email: String,
   createdAt: { type: Date, default: Date.now() },
+  todos: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Todo",
+    },
+  ],
 });
 
 UserSchema.pre("save", async function (done) {
@@ -18,7 +24,7 @@ UserSchema.pre("save", async function (done) {
 });
 
 UserSchema.methods.generateJwt = function generateJwt() {
-  const token = generateToken(this.email, this._id, this.username);
+  const token = generateToken(this._id, this.email, this.username);
   return token;
 };
 

@@ -12,8 +12,10 @@ const PORT = process.env.port || 5000;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => ({ req }), // get req.body or context for header
 });
 
+// mongoose.set("debug", true);
 mongoose
   .connect(MONGODB, {
     useNewUrlParser: true,
