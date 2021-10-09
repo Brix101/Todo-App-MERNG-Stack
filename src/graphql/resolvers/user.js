@@ -19,7 +19,7 @@ module.exports = {
 
       const isMatch = await Password.compare(user.password, password);
       if (!isMatch) {
-        errors.general = "User not found";
+        errors.general = "Incorrect password";
         throw new UserInputError("Wrong Credentials", { errors });
       }
       return {
