@@ -5,8 +5,8 @@ const todoSchema = new Schema({
   isCompleted: { type: Boolean, default: false },
   owner: { type: Schema.Types.ObjectId, ref: "User" },
   createdAt: { type: Date, default: Date.now() },
-  dueDate: { type: Date, default: Date.now() },
   updatedAt: { type: Date, default: Date.now() },
+  dueDate: { type: Date, default: Date.now() },
 });
 
 todoSchema.set("toObject", { virtuals: true });
