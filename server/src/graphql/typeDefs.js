@@ -31,6 +31,6 @@ module.exports = gql`
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
     createTodo(todo: String): Todo!
-    deleteTodo(todoId: ID): String!
+    deleteTodo(id: String!): String!
   }
 `;

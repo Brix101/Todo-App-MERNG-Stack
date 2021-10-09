@@ -5,18 +5,10 @@ const {
   validateLoginInput,
 } = require("../../utils/validation");
 const { Password } = require("../../utils/Password");
-const { authorization } = require("../../utils/auth");
 
 const User = require("../../models/User");
 
 module.exports = {
-  Query: {
-    async getUser(_, args, context) {
-      const user = authorization(context);
-      console.log(user);
-      return user;
-    },
-  },
   Mutation: {
     async login(_, { username, password }) {
       const { errors, valid } = validateLoginInput(username, password);

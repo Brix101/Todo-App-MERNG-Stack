@@ -2,7 +2,7 @@ const { model, Schema } = require("mongoose");
 const { Password } = require("../utils/Password");
 const { generateToken } = require("../utils/auth");
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
   username: String,
   password: String,
   email: String,
@@ -14,8 +14,10 @@ const UserSchema = new Schema({
     },
   ],
 });
+userSchema.set("toObject", { virtuals: true });
+userSchema.set("toJSON", { virtuals: true });
 
-UserSchema.pre("save", async function (done) {
+userSchema.pre("save", async function (done) {
   if (this.isModified("password")) {
     const hashed = await Password.toHash(this.get("password"));
     this.set("password", hashed);
@@ -23,9 +25,9 @@ UserSchema.pre("save", async function (done) {
   done();
 });
 
-UserSchema.methods.generateJwt = function generateJwt() {
+userSchema.methods.generateJwt = function generateJwt() {
   const token = generateToken(this._id, this.email, this.username);
   return token;
 };
 
-module.exports = model("User", UserSchema);
+module.exports = model("User", userSchema);

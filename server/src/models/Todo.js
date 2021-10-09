@@ -1,6 +1,6 @@
 const { model, Schema } = require("mongoose");
 
-const TodoSchema = new Schema({
+const todoSchema = new Schema({
   todo: { type: String, required: true },
   isCompleted: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now() },
@@ -8,4 +8,7 @@ const TodoSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
-module.exports = model("Todo", TodoSchema);
+todoSchema.set("toObject", { virtuals: true });
+todoSchema.set("toJSON", { virtuals: true });
+
+module.exports = model("Todo", todoSchema);
