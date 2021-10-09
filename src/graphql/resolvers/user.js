@@ -1,15 +1,36 @@
 const { UserInputError } = require("apollo-server");
 
-const { validateRegisterInput } = require("../../utils/validation");
+const {
+  validateRegisterInput,
+  validateLoginInput,
+} = require("../../utils/validation");
 const User = require("../../models/User");
+const { Password } = require("../../utils/Password");
 
 module.exports = {
   Mutation: {
+    async login(_, { username, password }) {
+      const { errors, valid } = validateLoginInput(username, password);
+      const user = await User.findOne({ username });
+      if (!user) {
+        errors.general = "User not found";
+        throw new UserInputError("Wrong Credentials", { errors });
+      }
+
+      const isMatch = await Password.compare(user.password, password);
+      if (!isMatch) {
+        errors.general = "User not found";
+        throw new UserInputError("Wrong Credentials", { errors });
+      }
+      return {
+        ...user._doc,
+        id: user._id,
+        token: user.generateJwt(),
+      };
+    },
     async register(
       _,
-      { registerInput: { username, email, password, confirmPassword } },
-      context,
-      info
+      { registerInput: { username, email, password, confirmPassword } }
     ) {
       // Validate user data
       const { valid, errors } = validateRegisterInput(
