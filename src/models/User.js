@@ -1,6 +1,6 @@
 const { model, Schema } = require("mongoose");
-const { Password } = require("../services/Password");
-const { generateToken } = require("../services/auth");
+const { Password } = require("../utils/Password");
+const { generateToken } = require("../utils/auth");
 
 const UserSchema = new Schema({
   username: String,
