@@ -12,7 +12,7 @@ module.exports = {
         const logUser = await User.findById(user._id);
         const todos = await Todo.find({ owner: logUser.id })
           .populate("owner")
-          .sort({ createdAt: -1 });
+          .sort({ dueDate: -1 });
         return todos;
       } catch (error) {
         throw new Error(error);
