@@ -1,0 +1,17 @@
+.InputBox {
+  width: auto;
+  height: 40px;
+  color: var(--color-5);
+  border-bottom: 1px solid var(--color-5);
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.InputBox input {
+  font-size: 20px;
+  padding: 4px;
+  border: none;
+  outline: none;
+}

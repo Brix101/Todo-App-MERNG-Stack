@@ -1,0 +1,9 @@
+.Form {
+  width: 80%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}

@@ -1,0 +1,64 @@
+.Button {
+  width: auto;
+  height: auto;
+  margin: 4px;
+  padding: 4px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  font-size: 20px;
+  transition: all 0.4s ease-in-out;
+  width: 40px;
+  height: 40px;
+  font-size: 32px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.Button * {
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-primary {
+  background-color: var(--color-1);
+  color: var(--color-5);
+}
+.btn-secondary {
+  background-color: var(--color-1);
+  color: var(--color-2);
+}
+.btn-secondary:hover {
+  background-color: var(--color-5);
+}
+.btn-secondary:hover * {
+  color: var(--color-1);
+}
+.btn-danger {
+  background-color: var(--color-1);
+  color: var(--color-6);
+}
+.btn-danger:hover {
+  background-color: var(--color-danger);
+}
+
+.btn-tl {
+  position: absolute;
+  background-color: rgb(119, 136, 168);
+  width: 100%;
+  height: 100%;
+  left: -100%;
+  top: 0;
+}
+
+.Button:hover {
+  border-radius: 0;
+}
+.Button:hover .btn-tl {
+  left: 200%;
+}
+
+.login-button {
+  width: auto;
+  height: 40px;
+  margin-bottom: 10px;
+}
