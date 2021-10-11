@@ -16,13 +16,13 @@ module.exports = {
 
       if (!user) {
         errors.general = "User not found";
-        throw new UserInputError("Wrong Credentials", { errors });
+        throw new UserInputError("User not found", { errors });
       }
 
       const isMatch = await Password.compare(user.password, password);
       if (!isMatch) {
         errors.general = "Incorrect password";
-        throw new UserInputError("Wrong Credentials", { errors });
+        throw new UserInputError("Incorrect password", { errors });
       }
       return {
         ...user._doc,

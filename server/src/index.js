@@ -15,7 +15,7 @@ const server = new ApolloServer({
   context: ({ req }) => ({ req }), // get req.body or context for header
 });
 
-// mongoose.set("debug", true);
+mongoose.set("debug", true);
 mongoose
   .connect(MONGODB, {
     useNewUrlParser: true,
